@@ -1,6 +1,6 @@
 {
   "name": "@discord-rahmen/discord.js-layer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Discord.js compatibility layer for the discord-rahmen framework",
   "main": "dist/index.js",
   "scripts": {

@@ -1,11 +1,11 @@
 import type { PresenceData, ClientOptions, Client } from "discord.js";
 
-export interface DHClientOptions {
+export interface DRClientOptions {
     token: string;
     precense: PresenceData;
     clientOptions: ClientOptions;
 }
 
-export interface DHClientClass {
+export interface DRClientClass {
     wrapperClient: Client;
 }
