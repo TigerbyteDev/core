@@ -1,10 +1,15 @@
 import {
-    ApplicationCommandData, ApplicationCommandResolvable,
+    ApplicationCommandData,
+    ApplicationCommandResolvable,
     Client,
     FetchApplicationCommandOptions,
     Snowflake,
 } from "discord.js";
-import type { DRClientOptions, DRClientClass } from "../types";
+import type {
+    DRClientOptions,
+    DRClientClass,
+    DRCommandOptionType, DRCommandType
+} from "../types";
 
 export class DRClient implements DRClientClass {
     wrapperClient;
@@ -60,5 +65,34 @@ export class DRClient implements DRClientClass {
 
     public setCommand(commands: ApplicationCommandData[], guildID?: Snowflake) {
         return this.wrapperClient.application.commands.set(commands, guildID);
+    }
+
+    // Converting Applicationcommand types to Discord.js Options
+    public convertOptionType(option: DRCommandOptionType) {
+        const data = {
+            "string": "STRING",
+            "number": "NUMBER",
+            "boolean": "BOOLEAN",
+            "subCommand": "SUB_COMMAND",
+            "subCommandGroup": "SUB_COMMAND_GROUP",
+            "user": "USER",
+            "channel": "CHANNEL",
+            "role": "ROLE",
+            "mentionable": "MENTIONABLE",
+            "integer": "INTEGER",
+            "attachment": "ATTACHMENT",
+        }
+
+        return data[option] ?? data["string"];
+    }
+
+    public convertCommandType(type: DRCommandType) {
+        const data = {
+            "chatInput": "CHAT_INPUT",
+            "user": "USER",
+            "message": "MESSAGE",
+        }
+
+        return data[type] ?? data["chatInput"];
     }
 }
