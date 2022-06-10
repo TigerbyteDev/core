@@ -1,10 +1,11 @@
 {
   "name": "@discord-rahmen/discord.js-layer",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Discord.js compatibility layer for the discord-rahmen framework",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "tsc && npm publish"
   },
   "author": "discord-rahmen",
   "license": "LGPL-3.0",

@@ -1,2 +1,2 @@
-export * from './classes/DHClient';
+export * from './classes/DRClient';
 export * from './types';
