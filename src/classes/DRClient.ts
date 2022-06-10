@@ -1,8 +1,10 @@
 import {
     ApplicationCommandData,
     ApplicationCommandResolvable,
+    Awaitable,
     Client,
     FetchApplicationCommandOptions,
+    Interaction, Message,
     Snowflake,
 } from "discord.js";
 import type {
@@ -94,5 +96,46 @@ export class DRClient implements DRClientClass {
         }
 
         return data[type] ?? data["chatInput"];
+    }
+
+    // Running Events universally
+    public newInteractionListener(once: boolean, listener: (( interaction: Interaction ) => Awaitable<void>)) {
+        if (once) {
+            this.wrapperClient.once("interactionCreate", listener);
+        } else {
+            this.wrapperClient.on("interactionCreate", listener);
+        }
+    }
+
+    public newMessageListener(once: boolean, listener: (( message: Message ) => Awaitable<void>)) {
+        if (once) {
+            this.wrapperClient.once("messageCreate", listener);
+        } else {
+            this.wrapperClient.on("messageCreate", listener);
+        }
+    }
+
+    public debugListener(once: boolean, listener: (( info: string ) => Awaitable<void>)) {
+        if (once) {
+            this.wrapperClient.once("debug", listener);
+        } else {
+            this.wrapperClient.on("debug", listener);
+        }
+    }
+
+    public warnListener(once: boolean, listener: (( info: string ) => Awaitable<void>)) {
+        if (once) {
+            this.wrapperClient.once("warn", listener);
+        } else {
+            this.wrapperClient.on("warn", listener);
+        }
+    }
+
+    public errorListener(once: boolean, listener: (( info: Error ) => Awaitable<void>)) {
+        if (once) {
+            this.wrapperClient.once("error", listener);
+        } else {
+            this.wrapperClient.on("error", listener);
+        }
     }
 }
