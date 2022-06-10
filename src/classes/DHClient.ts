@@ -11,9 +11,13 @@ export class DHClient implements DHClientClass {
     constructor(options: DHClientOptions) {
         this.wrapperClient = new Client(options.clientOptions);
 
-        this.wrapperClient.once("ready", () => {
-            this.wrapperClient.user.setPresence(options.precense)
-        });
+        // Setting Presence if given
+        if (options.precense) {
+            this.wrapperClient.once("ready", () => {
+                this.wrapperClient.user.setPresence(options.precense);
+            });
+        }
+
         this.wrapperClient.login(options.token).then();
     }
 
